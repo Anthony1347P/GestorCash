@@ -2,10 +2,10 @@ package com.pdm0126.gestorcash_00202124_00073523.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val Verde80 = Color(0xFF7FD8A0)
+val VerdeGris80 = Color(0xFFB8CCBE)
+val VerdeAgua80 = Color(0xFFA5D6B7)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val Verde40 = Color(0xFF15803D)
+val VerdeGris40 = Color(0xFF4C6552)
+val VerdeAgua40 = Color(0xFF2E7D52)
