@@ -1,14 +1,16 @@
 package com.pdm0126.gestorcash_00202124_00073523.screens.Login
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.pdm0126.gestorcash_00202124_00073523.data.AlmacenSesion
 import com.pdm0126.gestorcash_00202124_00073523.data.RepositorioAuth
 import com.pdm0126.gestorcash_00202124_00073523.data.RepositorioAuthImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repositorio: RepositorioAuth = RepositorioAuthImpl()
 
@@ -30,7 +32,10 @@ class LoginViewModel : ViewModel() {
             _cargando.value = true
             _mensajeError.value = null
             val resultado = repositorio.login(correo, password)
-            if (resultado.isSuccess) {
+            val usuario = resultado.getOrNull()
+            if (resultado.isSuccess && usuario != null) {
+                // guarda la sesion para mantenerla activa
+                AlmacenSesion.guardar(getApplication(), "token-demo", usuario.nombre)
                 _loginExitoso.value = true
             } else {
                 _mensajeError.value = "Credenciales incorrectas"

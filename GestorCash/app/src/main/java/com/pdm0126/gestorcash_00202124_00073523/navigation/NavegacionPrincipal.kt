@@ -6,17 +6,30 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import com.pdm0126.gestorcash_00202124_00073523.data.AlmacenSesion
 import com.pdm0126.gestorcash_00202124_00073523.screens.Login.LoginScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Registro.RegistroScreen
 
 @Composable
 fun NavegacionPrincipal() {
     val backStack = rememberNavBackStack(Rutas.Login)
+    val contexto = LocalContext.current
+
+    // si hay sesion guardada entra directo al inicio
+    LaunchedEffect(Unit) {
+        val token = AlmacenSesion.obtenerToken(contexto)
+        if (token != null) {
+            backStack.clear()
+            backStack.add(Rutas.Inicio)
+        }
+    }
 
     // cambia de tab reemplazando la pantalla actual
     val navegarTab: (Rutas) -> Unit = { ruta ->

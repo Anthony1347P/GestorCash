@@ -1,14 +1,16 @@
 package com.pdm0126.gestorcash_00202124_00073523.screens.Registro
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.pdm0126.gestorcash_00202124_00073523.data.AlmacenSesion
 import com.pdm0126.gestorcash_00202124_00073523.data.RepositorioAuth
 import com.pdm0126.gestorcash_00202124_00073523.data.RepositorioAuthImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class RegistroViewModel : ViewModel() {
+class RegistroViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repositorio: RepositorioAuth = RepositorioAuthImpl()
 
@@ -34,7 +36,9 @@ class RegistroViewModel : ViewModel() {
             _cargando.value = true
             _mensajeError.value = null
             val resultado = repositorio.registrar(nombre, correo, password)
-            if (resultado.isSuccess) {
+            val usuario = resultado.getOrNull()
+            if (resultado.isSuccess && usuario != null) {
+                AlmacenSesion.guardar(getApplication(), "token-demo", usuario.nombre)
                 _registroExitoso.value = true
             } else {
                 _mensajeError.value = "No se pudo crear la cuenta"
