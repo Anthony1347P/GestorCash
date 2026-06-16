@@ -16,6 +16,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.pdm0126.gestorcash_00202124_00073523.data.AlmacenSesion
 import com.pdm0126.gestorcash_00202124_00073523.screens.Login.LoginScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Registro.RegistroScreen
+import com.pdm0126.gestorcash_00202124_00073523.screens.Agregar.AgregarScreen
 
 @Composable
 fun NavegacionPrincipal() {
@@ -62,7 +63,7 @@ fun NavegacionPrincipal() {
                 )
             }
             entry<Rutas.Inicio> { _ -> PantallaTab("Inicio", Rutas.Inicio, navegarTab) }
-            entry<Rutas.Agregar> { _ -> PantallaTab("Agregar", Rutas.Agregar, navegarTab) }
+            entry<Rutas.Agregar> { _ -> AgregarScreen(onNavegar = navegarTab) }
             entry<Rutas.Historial> { _ -> PantallaTab("Historial", Rutas.Historial, navegarTab) }
             entry<Rutas.Presupuesto> { _ -> PantallaTab("Presupuesto", Rutas.Presupuesto, navegarTab) }
         }
@@ -80,3 +81,5 @@ fun PantallaTab(nombre: String, ruta: Rutas, onNavegar: (Rutas) -> Unit) {
         }
     }
 }
+
+

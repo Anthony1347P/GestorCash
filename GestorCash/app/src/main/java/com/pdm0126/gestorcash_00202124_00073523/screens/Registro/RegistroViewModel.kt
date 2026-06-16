@@ -5,15 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.pdm0126.gestorcash_00202124_00073523.data.AlmacenSesion
 import com.pdm0126.gestorcash_00202124_00073523.data.RepositorioAuth
-import com.pdm0126.gestorcash_00202124_00073523.data.RepositorioAuthImpl
+import com.pdm0126.gestorcash_00202124_00073523.data.Repositorios
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class RegistroViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repositorio: RepositorioAuth = RepositorioAuthImpl()
-
+    private val repositorio: RepositorioAuth = Repositorios.auth
     private val _cargando = MutableStateFlow(false)
     val cargando = _cargando.asStateFlow()
 
