@@ -18,6 +18,8 @@ import com.pdm0126.gestorcash_00202124_00073523.screens.Login.LoginScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Registro.RegistroScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Agregar.AgregarScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Historial.HistorialScreen
+import com.pdm0126.gestorcash_00202124_00073523.screens.Inicio.InicioScreen
+
 
 @Composable
 fun NavegacionPrincipal() {
@@ -63,7 +65,17 @@ fun NavegacionPrincipal() {
                     onVolverLogin = { backStack.removeLastOrNull() }
                 )
             }
-            entry<Rutas.Inicio> { _ -> PantallaTab("Inicio", Rutas.Inicio, navegarTab) }
+
+            entry<Rutas.Inicio> { _ ->
+                InicioScreen(
+                    onNavegar = navegarTab,
+                    onCerrarSesion = {
+                        backStack.clear()
+                        backStack.add(Rutas.Login)
+                    }
+                )
+            }
+
             entry<Rutas.Agregar> { _ -> AgregarScreen(onNavegar = navegarTab) }
             entry<Rutas.Historial> { _ -> HistorialScreen(onNavegar = navegarTab) }
             entry<Rutas.Presupuesto> { _ -> PantallaTab("Presupuesto", Rutas.Presupuesto, navegarTab) }
