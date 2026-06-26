@@ -1,25 +1,18 @@
 package com.pdm0126.gestorcash_00202124_00073523.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.pdm0126.gestorcash_00202124_00073523.data.AlmacenSesion
-import com.pdm0126.gestorcash_00202124_00073523.screens.Login.LoginScreen
-import com.pdm0126.gestorcash_00202124_00073523.screens.Registro.RegistroScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Agregar.AgregarScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Historial.HistorialScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Inicio.InicioScreen
-
+import com.pdm0126.gestorcash_00202124_00073523.screens.Login.LoginScreen
+import com.pdm0126.gestorcash_00202124_00073523.screens.Presupuesto.PresupuestoScreen
+import com.pdm0126.gestorcash_00202124_00073523.screens.Registro.RegistroScreen
 
 @Composable
 fun NavegacionPrincipal() {
@@ -65,7 +58,6 @@ fun NavegacionPrincipal() {
                     onVolverLogin = { backStack.removeLastOrNull() }
                 )
             }
-
             entry<Rutas.Inicio> { _ ->
                 InicioScreen(
                     onNavegar = navegarTab,
@@ -75,24 +67,9 @@ fun NavegacionPrincipal() {
                     }
                 )
             }
-
             entry<Rutas.Agregar> { _ -> AgregarScreen(onNavegar = navegarTab) }
             entry<Rutas.Historial> { _ -> HistorialScreen(onNavegar = navegarTab) }
-            entry<Rutas.Presupuesto> { _ -> PantallaTab("Presupuesto", Rutas.Presupuesto, navegarTab) }
+            entry<Rutas.Presupuesto> { _ -> PresupuestoScreen(onNavegar = navegarTab) }
         }
     )
 }
-
-@Composable
-fun PantallaTab(nombre: String, ruta: Rutas, onNavegar: (Rutas) -> Unit) {
-    Scaffold(bottomBar = { BarraInferior(ruta, onNavegar) }) { innerPadding ->
-        Box(
-            modifier = Modifier.fillMaxSize().padding(innerPadding),
-            contentAlignment = Alignment.Center
-        ) {
-            Text("Pantalla $nombre")
-        }
-    }
-}
-
-
