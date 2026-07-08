@@ -18,3 +18,5 @@ const UsuarioModel = {
         return rows[0];
     }
 };
+
+module.exports = UsuarioModel;
