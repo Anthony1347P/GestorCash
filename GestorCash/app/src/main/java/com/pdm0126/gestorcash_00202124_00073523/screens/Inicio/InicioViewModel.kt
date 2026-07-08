@@ -51,9 +51,11 @@ class InicioViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun cerrarSesion(alTerminar: () -> Unit) {
+        alTerminar()
         viewModelScope.launch {
             AlmacenSesion.cerrar(getApplication())
-            alTerminar()
         }
+
     }
 }
+

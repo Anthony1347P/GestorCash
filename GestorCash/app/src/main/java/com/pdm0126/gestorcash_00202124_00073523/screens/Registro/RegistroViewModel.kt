@@ -9,6 +9,7 @@ import com.pdm0126.gestorcash_00202124_00073523.data.Repositorios
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import com.pdm0126.gestorcash_00202124_00073523.data.ClienteHttp
 
 class RegistroViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -37,7 +38,7 @@ class RegistroViewModel(application: Application) : AndroidViewModel(application
             val resultado = repositorio.registrar(nombre, correo, password)
             val usuario = resultado.getOrNull()
             if (resultado.isSuccess && usuario != null) {
-                AlmacenSesion.guardar(getApplication(), "token-demo", usuario.nombre)
+                AlmacenSesion.guardar(getApplication(), ClienteHttp.token ?: "", usuario.nombre)
                 _registroExitoso.value = true
             } else {
                 _mensajeError.value = "No se pudo crear la cuenta"
@@ -46,3 +47,4 @@ class RegistroViewModel(application: Application) : AndroidViewModel(application
         }
     }
 }
+

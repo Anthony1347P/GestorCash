@@ -9,7 +9,7 @@ import com.pdm0126.gestorcash_00202124_00073523.data.Repositorios
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-
+import com.pdm0126.gestorcash_00202124_00073523.data.ClienteHttp
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repositorio: RepositorioAuth = Repositorios.auth
@@ -34,7 +34,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             val usuario = resultado.getOrNull()
             if (resultado.isSuccess && usuario != null) {
                 // guarda la sesion para mantenerla activa
-                AlmacenSesion.guardar(getApplication(), "token-demo", usuario.nombre)
+
+                AlmacenSesion.guardar(getApplication(), ClienteHttp.token ?: "", usuario.nombre)
                 _loginExitoso.value = true
             } else {
                 _mensajeError.value = "Credenciales incorrectas"
@@ -43,3 +44,4 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 }
+

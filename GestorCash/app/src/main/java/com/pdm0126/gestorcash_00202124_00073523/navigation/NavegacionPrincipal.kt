@@ -7,6 +7,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.pdm0126.gestorcash_00202124_00073523.data.AlmacenSesion
+import com.pdm0126.gestorcash_00202124_00073523.data.ClienteHttp
 import com.pdm0126.gestorcash_00202124_00073523.screens.Agregar.AgregarScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Historial.HistorialScreen
 import com.pdm0126.gestorcash_00202124_00073523.screens.Inicio.InicioScreen
@@ -23,6 +24,7 @@ fun NavegacionPrincipal() {
     LaunchedEffect(Unit) {
         val token = AlmacenSesion.obtenerToken(contexto)
         if (token != null) {
+            ClienteHttp.token = token
             backStack.clear()
             backStack.add(Rutas.Inicio)
         }
@@ -73,3 +75,4 @@ fun NavegacionPrincipal() {
         }
     )
 }
+
